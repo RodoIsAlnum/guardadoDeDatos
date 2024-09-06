@@ -25,6 +25,7 @@ namespace guardadoDeDatos
             tbHeight.Leave += checkHeight;
             //tbPhone.TextChanged += checkPhone;
             tbPhone.Leave += checkPhone;
+
         }
 
         private bool isValidInt(string str)
@@ -32,7 +33,7 @@ namespace guardadoDeDatos
             int result;
             return int.TryParse(str, out result);
         }
-        private bool isValidFloat(string  str)
+        private bool isValidFloat(string str)
         {
             decimal result;
             return decimal.TryParse(str, out result);
@@ -40,7 +41,7 @@ namespace guardadoDeDatos
         private bool isValidTenDigitNum(string str)
         {
             long result;
-            return long.TryParse(str, out result);
+            return long.TryParse(str, out result) && str.Length == 10;
         }
         private bool isValidText(string str)
         {
@@ -58,7 +59,7 @@ namespace guardadoDeDatos
                     textBox.Clear();
                 }
             }
-        } 
+        }
 
         private void checkHeight(object sender, EventArgs e)
         {
@@ -98,8 +99,6 @@ namespace guardadoDeDatos
                 }
             }
         }
-
-
         private void btnSave_Click(object sender, EventArgs e)
         {
             // Get data from text boxes
@@ -127,7 +126,7 @@ namespace guardadoDeDatos
             {
                 gender = "Undefined";
             }
-            else if (rbIDontGiveAFuck.Checked) 
+            else if (rbIDontGiveAFuck.Checked)
             {
                 gender = "Apache Helicopter";
             }
