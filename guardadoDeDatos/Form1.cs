@@ -6,7 +6,6 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -17,15 +16,6 @@ namespace guardadoDeDatos
         public Form1()
         {
             InitializeComponent();
-        }
-        private bool isValidTenDigitNum(string str)
-        {
-            long result;
-            return long.TryParse(str, out result) && str.Length == 10;
-        }
-        private bool isValidText(string str)
-        {
-            return Regex.IsMatch(str, @"^[a-zA-Z\s]+$");
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -62,7 +52,7 @@ namespace guardadoDeDatos
             string data = $"Name: {names}\r\nLast Name: {lastnames}\r\nPhone: {phone}\r\nHeight: {height}\r\nAge: {age}\r\nGender: {gender}";
 
             // Save text file
-            string fileRoute = "C:\\Users\\Public\\out.txt";
+            string fileRoute = "C:\\Users\\BSTW\\Documents\\out.txt";
             bool fileExists = File.Exists(fileRoute);
 
             using (StreamWriter wrt = new StreamWriter(fileRoute))
