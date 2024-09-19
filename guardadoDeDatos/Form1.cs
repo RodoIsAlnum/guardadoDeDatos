@@ -111,14 +111,6 @@ namespace guardadoDeDatos
             age = int.Parse(tbAge.Text);
             height = float.Parse(tbHeight.Text);
             phone = long.Parse(tbPhone.Text);
-=========
-            height = float.Parse(tbHeight.Text);
->>>>>>>>> Temporary merge branch 2
-            phone = long.Parse(tbPhone.Text);
-=========
-            height = float.Parse(tbHeight.Text);
->>>>>>>>> Temporary merge branch 2
-            phone = long.Parse(tbPhone.Text);
 
             // Get gender
             string gender = "";

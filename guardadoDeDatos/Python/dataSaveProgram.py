@@ -1,4 +1,5 @@
 import tkinter as tk
+import re
 from tkinter import messagebox
 
 def clear():
@@ -9,6 +10,28 @@ def clear():
   tbAge.delete(0,tk.END)
   varGender.set(0)
   	
+#Validations
+def isValidInt(val):
+    try:
+      int(val)
+      return True
+    except ValueError:
+      return False
+
+def isValidFloat(val):
+    try:
+      float(val)
+      return True
+    except ValueError:
+      return False
+  
+def isValidPhone(val):
+     return val.isdigit() and len(val) == 10
+
+def isValidText(val):
+   return bool(re.match("^[a-zA-Z\s]+$", val))
+
+
 def save():
   names = tbName.get()
   lastN = tbLastName.get()
@@ -20,17 +43,23 @@ def save():
     gender = "Male"
   elif varGender.get() == 2:
     gender = "Female"
-  # Generate string
-  data = "Names: " + names + "\nLast Names: " + lastN + "\nAge: " + age + "\nPhone: " + phone + "\nHeight: " + height + "\nGender: " + gender
-  with open("3O2024Data.txt", "a") as file:
-    file.write(data + "\n\n")
-  # Show data message
-  messagebox.showinfo("Info" + "Data saved succesfully\n\n", data)
-
+  #validate data
+  
+  if(isValidInt(age) and isValidFloat(height) and isValidPhone(phone) and isValidText(names) and isValidText(lastN)):
+      # Generate string
+      data = "Names: " + names + "\nLast Names: " + lastN + "\nAge: " + age + "\nPhone: " + phone + "\nHeight: " + height + "\nGender: " + gender
+      with open("3O2024Data.txt", "a") as file:
+        file.write(data + "\n\n")
+      # Show data message
+      messagebox.showinfo("Info" + "Data saved succesfully\n\n", data)
+  else:
+     messagebox.showerror("Error", "Couldn't save data\n\nBadFormat")
+     
+   #clean data after saving
+  clear();  
 
 
 # Window creation
-
 window = tk.Tk()
 window.geometry("480x640")
 window.title("Form")
