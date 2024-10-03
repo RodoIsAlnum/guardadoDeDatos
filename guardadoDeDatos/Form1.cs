@@ -9,6 +9,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MySql.Data.MySqlClient;
 
 namespace guardadoDeDatos
 {
@@ -27,6 +28,33 @@ namespace guardadoDeDatos
             tbPhone.Leave += checkPhone;
 
         }
+
+        string sqlConnection = "server=localhost; port=3306; database=michaelbay; uid=root; pwd=;";
+
+        void insertRegistry(string name, string lastname, int age, float height,long telephone, string gender)
+        {
+            using (MySqlConnection connection = new MySqlConnection(sqlConnection))
+            {
+                connection.Open();
+
+                string insertQuery = "insert into tabla (nameVal, lastName, telephone, height, age, gender) " +
+                    "values (@name, @lastname, @telephone, @height, @age, @gender)";
+                
+                using (MySqlCommand command = new MySqlCommand(insertQuery,connection))
+                {
+                    command.Parameters.AddWithValue("@name", name);
+                    command.Parameters.AddWithValue("@lastname", lastname);
+                    command.Parameters.AddWithValue("@telephone", telephone);
+                    command.Parameters.AddWithValue("@height", height);
+                    command.Parameters.AddWithValue("@age", age);
+                    command.Parameters.AddWithValue("@gender", gender);
+
+                    command.ExecuteNonQuery();
+                }
+                connection.Close();
+            }
+        }
+
 
         private bool isValidInt(string str)
         {
@@ -150,6 +178,9 @@ namespace guardadoDeDatos
                 }
             }
             // Show cached data
+
+            insertRegistry(names, lastnames, age, height, phone, gender);
+
             MessageBox.Show("Data saved succesfully:\n\n" + data, "Information");
         }
 
