@@ -5,10 +5,3 @@ Phone: 1234567890
 Height: 12.0
 Gender: Male
 
-Names: Juan Manuel
-Last Names: Ley
-Age: 19
-Phone: 1234567890
-Height: 177
-Gender: Male
-
