@@ -171,6 +171,7 @@ namespace guardadoDeDatos
                 if (fileExists)
                 {
                     wrt.WriteLine();
+                    insertRegistry(names, lastnames, age, height, phone, gender);
                 }
                 else
                 {
@@ -179,7 +180,6 @@ namespace guardadoDeDatos
             }
             // Show cached data
 
-            insertRegistry(names, lastnames, age, height, phone, gender);
 
             MessageBox.Show("Data saved succesfully:\n\n" + data, "Information");
         }

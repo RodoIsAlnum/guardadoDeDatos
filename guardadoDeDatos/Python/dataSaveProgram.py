@@ -1,6 +1,29 @@
 import tkinter as tk
 import re
 from tkinter import messagebox
+import mysql.connector as mysqlCon
+
+
+def insertRegistry(name, lastname, age, height, phone, gender):
+    try:
+        connection = mysqlCon.connect(
+            host = "localhost",
+            port = "3306",
+            user = "root",
+            password = "",
+            database = "michaelbay"
+        )
+        cursor = connection.cursor()
+        query = "insert into tabla (nameVal, lastName, telephone, height, age, gender) values (%s, %s, %s, %s, %s, %s)"
+        values = (name, lastname, phone, height, age, gender)
+        cursor.execute(query, values)
+        connection.commit()
+        cursor.close()
+        connection.close()
+        messagebox.showinfo("info", "values saved succesfully on database")
+    except mysqlCon.error as err:
+        messagebox.showerror("Error", f"error while saving data: {err}")
+
 
 def clear():
   tbName.delete(0,tk.END)
@@ -46,6 +69,9 @@ def save():
   #validate data
   
   if(isValidInt(age) and isValidFloat(height) and isValidPhone(phone) and isValidText(names) and isValidText(lastN)):
+      #database savetry
+      insertRegistry(names, lastN, age, height, phone, gender)
+
       # Generate string
       data = "Names: " + names + "\nLast Names: " + lastN + "\nAge: " + age + "\nPhone: " + phone + "\nHeight: " + height + "\nGender: " + gender
       with open("3O2024Data.txt", "a") as file:
